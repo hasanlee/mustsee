@@ -23,11 +23,11 @@ const Favorites = () => {
       <ul className='favorites__list'>
         {favorites.map((item) => {
           return (
-            <li key={item.imdbID}>
+            <li key={item.imdbId}>
               {item.title} ({item.year})
               <button
                 className='btn'
-                onClick={() => removeHandler(item.imdbID)}
+                onClick={() => removeHandler(item.imdbId)}
               >
                 ❌
               </button>

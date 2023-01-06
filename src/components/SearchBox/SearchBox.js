@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToMovies } from "../../redux/stores/MoviesSlice";
+import { searchMovieAPI } from "../../services/omdbAPI";
 import "./SearchBox.css";
 
 function SearchBox() {
@@ -12,10 +13,9 @@ function SearchBox() {
   const searchLineChangeHandler = (e) => {
     setSearchLine(e.target.value);
   };
-  const searchBoxSubmitHandler = (e) => {
+  const searchBoxSubmitHandler = async (e) => {
     e.preventDefault();
-    // !TODO get request API
-    const result = [];
+    const result = await searchMovieAPI(searchLine);
     dispatch(addToMovies(result));
   };
 

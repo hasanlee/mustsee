@@ -8,7 +8,7 @@ const Movies = () => {
   return (
     <ul className='movies'>
       {movies.map((movie) => (
-        <li className='movies__item' key={movie.imdbID}>
+        <li className='movies__item' key={movie.imdbId}>
           <MovieItem {...movie} />
         </li>
       ))}
