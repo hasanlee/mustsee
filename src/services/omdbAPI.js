@@ -12,7 +12,6 @@ async function searchMovieAPI(query) {
         query
     );
     if (response.data.response) {
-      console.table(response.data.search);
       return response.data.search;
     }
     console.log(response.data);

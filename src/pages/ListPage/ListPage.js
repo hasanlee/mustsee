@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./ListPage.css";
 const ListPage = () => {
   const { id } = useParams();
+  const { favoriteLists } = useSelector((state) => state.favorite);
   const [movies] = useState([
     {
       title: "The Godfather",

@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./MovieItem.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToFavorites } from "../../redux/stores/FavoritesSlice";
 
 const MovieItem = (movie) => {
   const { title, year, poster } = movie;
+  const { favorites } = useSelector((state) => state.favorite);
+  const [favorited, setFavorited] = useState(false);
 
   const dispatch = useDispatch();
   const addHandler = () => {
     dispatch(addToFavorites(movie));
+    setFavorited(true);
   };
-
+  const checkFavorited = () => {
+    setFavorited(
+      favorites.findIndex((fav) => fav.imdbId === movie.imdbId) > 0
+        ? true
+        : false
+    );
+  };
+  useEffect(() => {
+    checkFavorited();
+  }, []);
   return (
     <article className='movie-item'>
       <img className='movie-item__poster' src={poster} alt={title} />
@@ -22,6 +34,7 @@ const MovieItem = (movie) => {
           type='button'
           className='movie-item__add-button'
           onClick={addHandler}
+          disabled={favorited}
         >
           Add to favorites
         </button>

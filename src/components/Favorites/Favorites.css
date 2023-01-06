@@ -31,3 +31,14 @@
   opacity: 0.9;
   transition: all 0.2s linear;
 }
+.list-header {
+  font-size: 16px;
+  font-weight: 600;
+}
+.box {
+  border: 1px solid #ddd;
+}
+
+.list-name {
+  font-size: 14px;
+}
