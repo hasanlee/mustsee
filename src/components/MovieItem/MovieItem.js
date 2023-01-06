@@ -23,7 +23,7 @@ const MovieItem = (movie) => {
           className='movie-item__add-button'
           onClick={addHandler}
         >
-          Добавить в список
+          Add to favorites
         </button>
       </div>
     </article>

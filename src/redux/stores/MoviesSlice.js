@@ -21,9 +21,13 @@ const initialState = {
 const movies = createSlice({
   name: "movies",
   initialState,
-  reducers: {},
+  reducers: {
+    addToMovies: (state, action) => {
+      state.movies = action.payload;
+    },
+  },
   extraReducers: {},
 });
 
-//export const {} = movies.actions;
+export const { addToMovies } = movies.actions;
 export default movies.reducer;
