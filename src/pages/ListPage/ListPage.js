@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./ListPage.css";
-const ListPage = (props) => {
-  const [movies, setMovies] = useState([
+const ListPage = () => {
+  const { id } = useParams();
+  const [movies] = useState([
     {
       title: "The Godfather",
       year: 1972,
@@ -9,22 +11,12 @@ const ListPage = (props) => {
     },
   ]);
   useEffect(() => {
-    const id = props.match.params;
-    console.log(id); // TODO: запрос к сервер на получение списка
-    // TODO: запросы к серверу по всем imdbID
-  }, []);
-  const state = useRef({
-    movies: [
-      {
-        title: "The Godfather",
-        year: 1972,
-        imdbID: "tt0068646",
-      },
-    ],
-  });
+    console.log(id);
+    // TODO: запрос к сервер на получение списка
+  }, [id]);
   return (
     <div className='list-page'>
-      <h1 className='list-page__title'>Мой список</h1>
+      <h1 className='list-page__title'>My favorites</h1>
       <ul>
         {movies.map((item) => {
           return (
