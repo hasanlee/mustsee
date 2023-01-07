@@ -19,7 +19,7 @@ const Favorites = () => {
       movies: favorites.map(({ imdbId }) => imdbId),
     };
     const response = await saveFavoriteListAPI(postData);
-    setListLink("/" + response);
+    setListLink("/list/" + response);
   };
 
   return (
@@ -29,6 +29,7 @@ const Favorites = () => {
         onChange={(e) => setTitle(e.target.value)}
         className='favorites__name'
         placeholder='List name'
+        disabled={listlink}
       />
       <ul className='favorites__list'>
         {favorites.map((item) => {
@@ -46,12 +47,15 @@ const Favorites = () => {
         })}
       </ul>
       {listlink ? (
-        <a href={listlink}>View your list</a>
+        <a href={listlink} target='_blank' rel='norefferer'>
+          View your list
+        </a>
       ) : (
         <button
           type='button'
           className='favorites__save'
           onClick={saveFavoriteListHandler}
+          disabled={!title}
         >
           Save to favorites
         </button>
