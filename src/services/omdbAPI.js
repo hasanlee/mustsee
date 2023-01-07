@@ -12,9 +12,9 @@ async function searchMovieAPI(query) {
         query
     );
     if (JSON.parse(response.data.response.toLowerCase())) {
-      console.log("iff");
       return response.data.search;
     } else {
+      console.log(response);
       return [];
     }
   } catch (error) {
@@ -35,10 +35,13 @@ async function getMovieById(id) {
     );
     if (JSON.parse(response.data.response.toLowerCase())) {
       return response.data;
+    } else {
+      console.log(response);
+      return [];
     }
-    console.log(response.data);
   } catch (error) {
     console.error(error);
+    return [];
   }
 }
 
