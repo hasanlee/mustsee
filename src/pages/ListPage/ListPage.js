@@ -13,7 +13,8 @@ const ListPage = () => {
       await getListById(id).then(({ title, movies: list }) => {
         setTitle(title);
         list.forEach(async (el) => {
-          setMovies([...movies, await getMovieById(el)]);
+          let movie = await getMovieById(el);
+          setMovies((movies) => [...movies, movie]);
         });
       });
     }
