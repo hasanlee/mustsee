@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToFavorites } from "../../redux/stores/FavoritesSlice";
 
 const MovieItem = (movie) => {
-  const { title, year, poster } = movie;
+  const { title, year, poster, imdbId } = movie;
   const { favorites } = useSelector((state) => state.favorite);
   const [favorited, setFavorited] = useState(false);
 
@@ -13,14 +13,13 @@ const MovieItem = (movie) => {
     dispatch(addToFavorites(movie));
     setFavorited(true);
   };
-  const checkFavorited = () => {
-    setFavorited(
-      favorites.findIndex((fav) => fav.imdbId === movie.imdbId) > 0
-        ? true
-        : false
-    );
-  };
+
   useEffect(() => {
+    const checkFavorited = () => {
+      setFavorited(
+        favorites.findIndex((fav) => fav.imdbId === imdbId) > 0 ? true : false
+      );
+    };
     checkFavorited();
   }, []);
   return (
@@ -36,7 +35,7 @@ const MovieItem = (movie) => {
           onClick={addHandler}
           disabled={favorited}
         >
-          Add to favorites
+          {favorited ? "Favorited ❤️" : "Add to favorites 🤍"}
         </button>
       </div>
     </article>

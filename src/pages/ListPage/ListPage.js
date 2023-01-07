@@ -8,16 +8,15 @@ const ListPage = () => {
   const [title, setTitle] = useState([]);
   const [movies, setMovies] = useState([]);
 
-  async function fetchData() {
-    await getListById(id).then(({ title, movies: list }) => {
-      setTitle(title);
-      list.forEach(async (el) => {
-        setMovies([...movies, await getMovieById(el)]);
-      });
-    });
-  }
-
   useEffect(() => {
+    async function fetchData() {
+      await getListById(id).then(({ title, movies: list }) => {
+        setTitle(title);
+        list.forEach(async (el) => {
+          setMovies([...movies, await getMovieById(el)]);
+        });
+      });
+    }
     fetchData();
   }, [id]);
 
@@ -31,6 +30,7 @@ const ListPage = () => {
               <a
                 href={"https://www.imdb.com/title/" + item.imdbId}
                 target='_blank'
+                rel='noreferrer'
               >
                 {item.title} ({item.year}) ⭐{item.imdbRating}/10
               </a>

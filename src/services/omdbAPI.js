@@ -13,10 +13,12 @@ async function searchMovieAPI(query) {
     );
     if (response.data.response) {
       return response.data.search;
+    } else {
+      return [];
     }
-    console.log(response.data);
   } catch (error) {
     console.error(error);
+    return [];
   }
 }
 

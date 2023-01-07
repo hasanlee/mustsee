@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  removeFromFavorites,
-  addFavoriteList,
-} from "../../redux/stores/FavoritesSlice";
+import { removeFromFavorites } from "../../redux/stores/FavoritesSlice";
 import { saveFavoriteListAPI } from "../../services/algoritmikaAPI";
 import "./Favorites.css";
 
 const Favorites = () => {
-  const { favorites, favoriteLists } = useSelector((state) => state.favorite);
+  const { favorites } = useSelector((state) => state.favorite);
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [listlink, setListLink] = useState("");
