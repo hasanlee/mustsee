@@ -36,12 +36,14 @@ const Favorites = () => {
           return (
             <li key={item.imdbId}>
               {item.title} ({item.year})
-              <button
-                className='btn'
-                onClick={() => removeHandler(item.imdbId)}
-              >
-                ❌
-              </button>
+              {listlink ? null : (
+                <button
+                  className='btn'
+                  onClick={() => removeHandler(item.imdbId)}
+                >
+                  ❌
+                </button>
+              )}
             </li>
           );
         })}
@@ -57,7 +59,7 @@ const Favorites = () => {
           onClick={saveFavoriteListHandler}
           disabled={!title}
         >
-          Save to favorites
+          Save list
         </button>
       )}
     </div>
