@@ -8,11 +8,22 @@ const movies = createSlice({
   initialState,
   reducers: {
     addToMovies: (state, action) => {
-      state.movies = action.payload;
+      state.movies = action.payload.map((item) => ({
+        ...item,
+        favorite: false,
+      }));
+    },
+    toggleFavorite: (state, action) => {
+      state.movies = state.movies.map((movie) => {
+        if (movie.imdbId === action.payload.imdbId) {
+          return { ...movie, favorite: action.payload.favorite };
+        }
+        return movie;
+      });
     },
   },
   extraReducers: {},
 });
 
-export const { addToMovies } = movies.actions;
+export const { addToMovies, toggleFavorite } = movies.actions;
 export default movies.reducer;

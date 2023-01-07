@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromFavorites } from "../../redux/stores/FavoritesSlice";
 import { saveFavoriteListAPI } from "../../services/algoritmikaAPI";
+import { toggleFavorite } from "../../redux/stores/MoviesSlice";
 import "./Favorites.css";
 
 const Favorites = () => {
@@ -10,8 +11,9 @@ const Favorites = () => {
   const [title, setTitle] = useState("");
   const [listlink, setListLink] = useState("");
 
-  const removeHandler = (id) => {
-    dispatch(removeFromFavorites(id));
+  const removeHandler = (item) => {
+    dispatch(removeFromFavorites(item.imdbId));
+    dispatch(toggleFavorite(item));
   };
   const saveFavoriteListHandler = async () => {
     const postData = {
@@ -37,10 +39,7 @@ const Favorites = () => {
             <li key={item.imdbId}>
               {item.title} ({item.year})
               {listlink ? null : (
-                <button
-                  className='btn'
-                  onClick={() => removeHandler(item.imdbId)}
-                >
+                <button className='btn' onClick={() => removeHandler(item)}>
                   ❌
                 </button>
               )}
