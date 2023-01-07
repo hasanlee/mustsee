@@ -11,37 +11,22 @@ const Favorites = () => {
   const { favorites, favoriteLists } = useSelector((state) => state.favorite);
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
+  const [listlink, setListLink] = useState("");
 
   const removeHandler = (id) => {
     dispatch(removeFromFavorites(id));
   };
-  const saveFavoriteListHandler = () => {
+  const saveFavoriteListHandler = async () => {
     const postData = {
       title,
       movies: favorites.map(({ imdbId }) => imdbId),
     };
-    const response = saveFavoriteListAPI(postData);
-    dispatch(addFavoriteList(response));
+    const response = await saveFavoriteListAPI(postData);
+    setListLink("/" + response);
   };
 
   return (
     <div className='favorites'>
-      <div className='box'>
-        <h1 className='list-header'>Your lists ({favoriteLists.length})</h1>
-        <br />
-        <ul className='favorites__list'>
-          {favoriteLists.map((list) => {
-            return (
-              <li className='list-name' key={list.id}>
-                <a href={"/list/" + list.id} target='_blank'>
-                  {list.title}
-                </a>{" "}
-                (Movies: {list.movies.length})
-              </li>
-            );
-          })}
-        </ul>
-      </div>
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -63,13 +48,17 @@ const Favorites = () => {
           );
         })}
       </ul>
-      <button
-        type='button'
-        className='favorites__save'
-        onClick={saveFavoriteListHandler}
-      >
-        Save to favorites
-      </button>
+      {listlink ? (
+        <a href={listlink}>View your list</a>
+      ) : (
+        <button
+          type='button'
+          className='favorites__save'
+          onClick={saveFavoriteListHandler}
+        >
+          Save to favorites
+        </button>
+      )}
     </div>
   );
 };

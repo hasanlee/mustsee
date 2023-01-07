@@ -20,4 +20,23 @@ async function searchMovieAPI(query) {
   }
 }
 
-export { searchMovieAPI };
+async function getMovieById(id) {
+  const client = applyCaseMiddleware(axios.create());
+  try {
+    const response = await client.get(
+      process.env.REACT_APP_OMDB_API_URL +
+        "?apikey=" +
+        process.env.REACT_APP_OMDB_API_KEY +
+        "&i=" +
+        id
+    );
+    if (response.data.response) {
+      return response.data;
+    }
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { searchMovieAPI, getMovieById };

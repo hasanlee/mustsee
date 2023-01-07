@@ -1,30 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { getMovieById } from "../../services/omdbAPI";
+import { getListById } from "../../services/algoritmikaAPI";
 import "./ListPage.css";
 const ListPage = () => {
   const { id } = useParams();
-  const { favoriteLists } = useSelector((state) => state.favorite);
-  const [movies] = useState([
-    {
-      title: "The Godfather",
-      year: 1972,
-      imdbID: "tt0068646",
-    },
-  ]);
+  const [title, setTitle] = useState([]);
+  const [movies, setMovies] = useState([]);
+
+  async function fetchData() {
+    await getListById(id).then(({ title, movies: list }) => {
+      setTitle(title);
+      list.forEach(async (el) => {
+        setMovies([...movies, await getMovieById(el)]);
+      });
+    });
+  }
+
   useEffect(() => {
-    console.log(id);
-    // TODO: запрос к сервер на получение списка
+    fetchData();
   }, [id]);
+
   return (
     <div className='list-page'>
-      <h1 className='list-page__title'>My favorites</h1>
+      <h1 className='list-page__title'>{title}</h1>
       <ul>
         {movies.map((item) => {
           return (
-            <li key={item.imdbID}>
-              <a href='https://www.imdb.com/title/tt0068646/' target='_blank'>
-                {item.title} ({item.year})
+            <li key={item.imdbId}>
+              <a
+                href={"https://www.imdb.com/title/" + item.imdbId}
+                target='_blank'
+              >
+                {item.title} ({item.year}) ⭐{item.imdbRating}/10
               </a>
             </li>
           );
