@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieById } from "../../services/omdbAPI";
 import { getListById } from "../../services/algoritmikaAPI";
 import Header from "../../components/Header/Header";
 import { BiCopyAlt } from "react-icons/bi";
 import Notification from "../../components/Notification/Notification";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 const ListPage = () => {
   const { id } = useParams();
   const [title, setTitle] = useState([]);
