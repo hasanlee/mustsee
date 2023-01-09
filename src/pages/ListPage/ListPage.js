@@ -41,10 +41,10 @@ const ListPage = () => {
       <Header />
 
       <main className='flex py-8 px-10 w-full items-center justify-center'>
-        <section className='w-1/2'>
+        <section className='w-1/2 max-md:w-full'>
           <div>
             <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-              <h1 className='text-3xl font-bold tracking-tight text-gray-900 dark:text-white flex justify-between'>
+              <h1 className='text-3xl max-md:text-lg font-bold tracking-tight text-gray-900 dark:text-white flex justify-between'>
                 List name : {title}{" "}
                 <div>
                   <button onClick={copyHandler}>
@@ -66,7 +66,7 @@ const ListPage = () => {
                     </div>
                     <div className='ml-4 flex flex-1 flex-col'>
                       <div>
-                        <div className='flex justify-between text-base font-medium text-black dark:text-white'>
+                        <div className='flex justify-between text-base font-medium text-black dark:text-white max-md:text-sm'>
                           <h3>
                             <a
                               href={"https://www.imdb.com/title/" + item.imdbId}
@@ -76,18 +76,20 @@ const ListPage = () => {
                               {item.title} ({item.year})
                             </a>
                           </h3>
-                          <p className='ml-4'>{item.director}</p>
+                          <p className='ml-4 max-md:text-xs'>{item.director}</p>
                         </div>
-                        <p className='mt-1 text-sm text-gray-500'>
+                        <p className='mt-1 text-sm text-gray-500 max-md:text-xs'>
                           {item.genre}
                         </p>
                       </div>
                       <div className='flex flex-1 items-end justify-between text-sm'>
-                        <p className='text-gray-500'>
+                        <p className='text-gray-500 max-md:text-xs'>
                           Rating: {item.imdbRating}/10
                         </p>
 
-                        <div className='flex'>{item.released}</div>
+                        <div className='flex max-md:text-xs'>
+                          {item.released}
+                        </div>
                       </div>
                     </div>
                   </li>
