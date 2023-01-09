@@ -19,7 +19,6 @@ const Header = () => {
         htmlEl.classList.remove("dark");
         break;
     }
-    console.log(darkMode);
   }, [darkMode]);
   return (
     <header className='w-full h-14 shadow-md flex items-center justify-between px-8'>

@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToFavorites } from "../../redux/stores/FavoritesSlice";
 import { toggleFavorite } from "../../redux/stores/MoviesSlice";
 
 const MovieItem = (movie) => {
-  const { title, year, poster, imdbId, favorite } = movie;
+  const { favorites } = useSelector((state) => state.favorite);
+  const [film, setFilm] = useState(movie);
+  const { title, year, poster, imdbId, favorite } = film;
   const dispatch = useDispatch();
   const addHandler = () => {
     dispatch(addToFavorites(movie));
     dispatch(toggleFavorite({ ...movie, favorite: !favorite }));
   };
 
+  useEffect(() => {
+    favorites.findIndex(({ imdbId: id }) => id === film.imdbId) < 0
+      ? setFilm({ ...film, favorite: false })
+      : setFilm({ ...film, favorite: true });
+  }, [movie]);
   return (
     <article>
       <div className='aspect-w-1 aspect-h-1 w-full overflow-hidden shadow-md rounded-lg bg-white dark:bg-slate-700 xl:aspect-w-7 xl:aspect-h-8'>
