@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieById } from "../../services/omdbAPI";
 import { getListById } from "../../services/algoritmikaAPI";
-import "./ListPage.css";
 const ListPage = () => {
   const { id } = useParams();
   const [title, setTitle] = useState([]);

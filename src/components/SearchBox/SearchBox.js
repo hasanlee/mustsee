@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToMovies } from "../../redux/stores/MoviesSlice";
 import { searchMovieAPI } from "../../services/omdbAPI";
-import "./SearchBox.css";
 
 function SearchBox() {
   const [searchLine, setSearchLine] = useState("");
@@ -20,23 +19,16 @@ function SearchBox() {
   };
 
   return (
-    <div className='search-box'>
-      <form className='search-box__form' onSubmit={searchBoxSubmitHandler}>
-        <label className='search-box__form-label'>
-          Search movie by name:
-          <input
-            value={searchLine}
-            type='text'
-            className='search-box__form-input'
-            placeholder='Example, Shawshank Redemption'
-            onChange={searchLineChangeHandler}
-          />
-        </label>
-        <button
-          type='submit'
-          className='search-box__form-submit'
-          disabled={!searchLine}
-        >
+    <div>
+      <form className='w-full flex gap-2' onSubmit={searchBoxSubmitHandler}>
+        <input
+          value={searchLine}
+          type='text'
+          className='w-full brand-input'
+          placeholder='Example, Shawshank Redemption'
+          onChange={searchLineChangeHandler}
+        />
+        <button type='submit' className='brand-btn' disabled={!searchLine}>
           Search
         </button>
       </form>
