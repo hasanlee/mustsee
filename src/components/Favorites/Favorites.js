@@ -4,12 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromFavorites } from "../../redux/stores/FavoritesSlice";
 import { saveFavoriteListAPI } from "../../services/algoritmikaAPI";
 import { toggleFavorite } from "../../redux/stores/MoviesSlice";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const Favorites = () => {
   const { favorites } = useSelector((state) => state.favorite);
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [listlink, setListLink] = useState("");
+  const [parent] = useAutoAnimate();
 
   const removeHandler = (item) => {
     dispatch(removeFromFavorites(item.imdbId));
@@ -36,7 +38,10 @@ const Favorites = () => {
         placeholder='List name'
         disabled={listlink}
       />
-      <ul className='max-w-md divide-y divide-gray-200 dark:divide-slate-600 p-3'>
+      <ul
+        ref={parent}
+        className='max-w-md divide-y divide-gray-200 dark:divide-slate-600 p-3'
+      >
         {favorites.map((item) => {
           return (
             <li className='pb-3 sm:pb-4' key={item.imdbId}>
